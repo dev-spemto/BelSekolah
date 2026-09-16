@@ -156,9 +156,7 @@ Untuk mengompilasi ulang installer executable (`.exe`), pastikan aplikasi **Inno
 Sistem ini dikembangkan dan dikelola secara penuh oleh **Tim IT / Tim Kreatif SMP Muhammadiyah Tonjong**:
 
 * 🏫 **Lembaga:** SMP Muhammadiyah Tonjong (SPEMTO)
-* 📍 **Alamat:** Jl. Raya Tonjong, Kecamatan Tonjong, Kabupaten Brebes, Jawa Tengah
-* ✉️ **Email Resmi:** [smpmuhitonjong@gmail.com](mailto:smpmuhitonjong@gmail.com)
-* 📞 **WhatsApp / Telepon:** [085185033377](https://wa.me/6285185033377)
+* 📍 **Alamat:** Jl. Raya Linggapura No.46, Kecamatan Tonjong, Kabupaten Brebes, Jawa Tengah
 * 🌐 **Website Resmi:** [https://smpmuhtonjong.sch.id](https://smpmuhtonjong.sch.id)
 
 ---
