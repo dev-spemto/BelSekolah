@@ -31,6 +31,84 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        /* CSS KHUSUS PRINT (A4 LANDSCAPE & FIT 1 HALAMAN) */
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 8mm;
+            }
+
+            body * {
+                visibility: hidden;
+            }
+
+            #modal-view-schedule, 
+            #modal-view-schedule * {
+                visibility: visible;
+            }
+
+            #modal-view-schedule {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100% !important;
+                height: auto !important;
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            #modal-view-schedule .bg-white,
+            #modal-view-schedule .bg-slate-900 {
+                background: white !important;
+                color: black !important;
+                box-shadow: none !important;
+                border: none !important;
+                max-width: 100% !important;
+                max-height: none !important;
+                padding: 0 !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            table {
+                width: 100% !important;
+                table-layout: fixed !important;
+                border-collapse: collapse !important;
+            }
+
+            th, td {
+                padding: 3px 4px !important;
+                font-size: 9px !important;
+                border: 1px solid #cbd5e1 !important;
+                word-wrap: break-word !important;
+            }
+
+            th {
+                background-color: #0f172a !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .print-badge {
+                border: 1px solid #94a3b8 !important;
+                padding: 2px 3px !important;
+                margin-bottom: 2px !important;
+                border-radius: 4px !important;
+                background-color: #f8fafc !important;
+                color: #0f172a !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            tr {
+                page-break-inside: avoid;
+            }
+        }
     </style>
 </head>
 <body class="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col justify-between transition-colors duration-300">
@@ -52,7 +130,7 @@
                     </div>
                 </div>
 
-                <!-- CLOCK & DATE (BAHASA INDONESIA) -->
+                <!-- CLOCK & DATE -->
                 <div class="text-center">
                     <div id="realtime-clock" class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight font-mono">
                         00:00:00 <span class="text-sm font-bold text-slate-400 dark:text-slate-500">WIB</span>
@@ -64,13 +142,11 @@
 
                 <!-- TOP CONTROLS -->
                 <div class="flex items-center gap-3">
-                    <!-- DARK / LIGHT MODE SWITCH BUTTON -->
                     <button onclick="toggleTheme()" title="Ubah Mode Tampilan (Gelap/Terang)"
                         class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-700 text-slate-700 dark:text-amber-300 hover:bg-slate-100 dark:hover:bg-slate-600 transition-all shadow-sm">
                         <span id="theme-toggle-icon" class="text-lg">🌙</span>
                     </button>
 
-                    <!-- SYSTEM STATUS BUTTON -->
                     <button onclick="toggleSystemStatus()" 
                         class="flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-xs border transition-all shadow-sm {{ $systemStatus === 'active' ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800' : 'bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-800' }}">
                         <span class="w-2.5 h-2.5 rounded-full {{ $systemStatus === 'active' ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500' }}"></span>
@@ -248,9 +324,14 @@
                         @endforelse
                     </div>
 
-                    <button onclick="openModal()" class="w-full mt-4 py-3 bg-slate-900 hover:bg-slate-800 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm">
-                        ⚙️ Kelola Semua Jadwal
-                    </button>
+                    <div class="space-y-2 mt-4">
+                        <button onclick="openModal()" class="w-full py-3 bg-slate-900 hover:bg-slate-800 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm">
+                            ⚙️ Kelola Semua Jadwal
+                        </button>
+                        <button onclick="openViewModal()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+                            👁️ Lihat Semua Jadwal (Senin-Sabtu)
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -265,7 +346,6 @@
                 <p class="mt-0.5">Sistem Bel Sekolah Otomatis SPEMTO — Brebes, Jawa Tengah.</p>
             </div>
 
-            <!-- CONTACT PERSON & LINKS -->
             <div class="flex flex-wrap items-center gap-4 font-semibold">
                 <a href="mailto:smpmuhitonjong@gmail.com" class="hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1">
                     ✉️ smpmuhitonjong@gmail.com
@@ -280,7 +360,7 @@
         </div>
     </footer>
 
-    <!-- MODAL POPUP SETTING JADWAL MANUAL -->
+    <!-- MODAL POPUP 1: SETTING JADWAL MANUAL & BACKUP -->
     <div id="modal-schedule" onclick="closeModalOnBackdrop(event)" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white dark:bg-slate-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl border border-slate-200 dark:border-slate-700 transition-colors duration-300">
             <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between bg-slate-50 dark:bg-slate-900/50">
@@ -290,14 +370,117 @@
 
             <div class="p-6 overflow-y-auto space-y-6">
 
-                <!-- PANEL HAPUS BATCH (KOSONGKAN JADWAL) -->
+                <!-- PANEL SAVE & LOAD CONFIGURATION -->
+                <div class="bg-blue-50/60 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/40 rounded-xl p-4 space-y-3">
+                    <h4 class="font-bold text-xs text-blue-900 dark:text-blue-300 uppercase tracking-wider flex items-center gap-1">
+                        <span>💾</span> Backup & Restore Konfigurasi Jadwal (Save / Load JSON)
+                    </h4>
+                    <p class="text-xs text-blue-700 dark:text-blue-400">
+                        Simpan seluruh susunan jadwal ke file JSON atau muat file jadwal saat berpindah komputer.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+                        <a href="{{ route('schedules.export') }}" 
+                            class="flex items-center justify-center gap-2 py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-sm transition-all text-center">
+                            <span>📥</span> Download Backup Config (Save JSON)
+                        </a>
+
+                        <form action="{{ route('schedules.import') }}" method="POST" enctype="multipart/form-data" class="flex gap-2" onsubmit="return confirm('Memuat file ini akan menggantikan seluruh jadwal bel yang ada. Lanjutkan?')">
+                            @csrf
+                            <input type="file" name="config_file" accept=".json" required 
+                                class="text-xs p-1.5 rounded-lg border border-blue-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 w-full file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 dark:file:bg-slate-800 dark:file:text-blue-300">
+                            <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl whitespace-nowrap shadow-sm">
+                                📤 Load JSON
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- PANEL SALIN JADWAL (HARI & VARIAN SEPARATED) -->
+                <div class="bg-indigo-50/60 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-900/40 rounded-xl p-4 space-y-3">
+                    <h4 class="font-bold text-xs text-indigo-900 dark:text-indigo-300 uppercase tracking-wider flex items-center gap-1">
+                        <span>📋</span> Salin / Duplikat Jadwal Bel (Hari & Varian)
+                    </h4>
+                    <p class="text-xs text-indigo-700 dark:text-indigo-400">
+                        Salin jadwal dari Hari/Varian asal ke Hari/Varian tujuan (contoh: <strong>Jumat + Jumat Jamaah</strong> ➔ <strong>Jumat + Jumat Ringkas</strong>).
+                    </p>
+
+                    <form action="{{ route('schedules.copyDay') }}" method="POST" onsubmit="return confirm('Salin jadwal ke lokasi tujuan? Jadwal pada lokasi tujuan akan diperbarui.')">
+                        @csrf
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-center">
+                            
+                            <!-- DARI HARI -->
+                            <div>
+                                <label class="text-[10px] font-bold text-indigo-900 dark:text-indigo-300 block mb-1 uppercase">Dari Hari (Asal)</label>
+                                <select name="from_day" required class="w-full text-xs p-2 rounded-lg border border-indigo-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+                                    <option value="monday">Senin</option>
+                                    <option value="tuesday">Selasa</option>
+                                    <option value="wednesday">Rabu</option>
+                                    <option value="thursday">Kamis</option>
+                                    <option value="friday" selected>Jumat</option>
+                                    <option value="saturday">Sabtu</option>
+                                </select>
+                            </div>
+
+                            <!-- DARI VARIAN -->
+                            <div>
+                                <label class="text-[10px] font-bold text-indigo-900 dark:text-indigo-300 block mb-1 uppercase">Dari Varian</label>
+                                <select name="from_variant" required class="w-full text-xs p-2 rounded-lg border border-indigo-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+                                    <option value="default">Reguler Harian</option>
+                                    <option value="jumat_jamaah" selected>Jumat Jamaah</option>
+                                    <option value="jumat_ringkas">Jumat Ringkas</option>
+                                    <option value="puasa">Mode Puasa</option>
+                                    <option value="asts">Mode ASTS</option>
+                                    <option value="asas">Mode ASAS</option>
+                                    <option value="ujian_sekolah">Mode Ujian Sekolah</option>
+                                </select>
+                            </div>
+
+                            <!-- KE HARI -->
+                            <div>
+                                <label class="text-[10px] font-bold text-indigo-900 dark:text-indigo-300 block mb-1 uppercase">Ke Hari (Tujuan)</label>
+                                <select name="to_day" required class="w-full text-xs p-2 rounded-lg border border-indigo-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+                                    <option value="monday">Senin</option>
+                                    <option value="tuesday">Selasa</option>
+                                    <option value="wednesday">Rabu</option>
+                                    <option value="thursday">Kamis</option>
+                                    <option value="friday" selected>Jumat</option>
+                                    <option value="saturday">Sabtu</option>
+                                </select>
+                            </div>
+
+                            <!-- KE VARIAN -->
+                            <div>
+                                <label class="text-[10px] font-bold text-indigo-900 dark:text-indigo-300 block mb-1 uppercase">Ke Varian</label>
+                                <select name="to_variant" required class="w-full text-xs p-2 rounded-lg border border-indigo-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+                                    <option value="default">Reguler Harian</option>
+                                    <option value="jumat_jamaah">Jumat Jamaah</option>
+                                    <option value="jumat_ringkas" selected>Jumat Ringkas</option>
+                                    <option value="puasa">Mode Puasa</option>
+                                    <option value="asts">Mode ASTS</option>
+                                    <option value="asas">Mode ASAS</option>
+                                    <option value="ujian_sekolah">Mode Ujian Sekolah</option>
+                                </select>
+                            </div>
+
+                            <!-- TOMBOL SUBMIT -->
+                            <div class="lg:pt-5">
+                                <button type="submit" class="w-full py-2 px-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl shadow-sm transition-all whitespace-nowrap">
+                                    🔄 Salin Jadwal
+                                </button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+                <!-- PANEL HAPUS BATCH -->
                 <div class="bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-900/40 rounded-xl p-4 space-y-3">
                     <h4 class="font-bold text-xs text-rose-900 dark:text-rose-300 uppercase tracking-wider flex items-center gap-1">
                         <span>🗑️</span> Opsi Hapus Batch / Kosongkan Jadwal
                     </h4>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <!-- Hapus Berdasarkan Hari -->
                         <form action="{{ route('schedules.destroyBatch') }}" method="POST" onsubmit="return confirm('Hapus seluruh jadwal pada hari yang dipilih?')">
                             @csrf
                             @method('DELETE')
@@ -315,7 +498,6 @@
                             </div>
                         </form>
 
-                        <!-- Hapus Berdasarkan Varian -->
                         <form action="{{ route('schedules.destroyBatch') }}" method="POST" onsubmit="return confirm('Hapus seluruh jadwal pada varian yang dipilih?')">
                             @csrf
                             @method('DELETE')
@@ -334,7 +516,6 @@
                             </div>
                         </form>
 
-                        <!-- Hapus SEMUA Jadwal -->
                         <form action="{{ route('schedules.destroyBatch') }}" method="POST" onsubmit="return confirm('PERINGATAN: Apakah Anda yakin ingin MENGHAPUS SEMUA JADWAL yang ada di database?')">
                             @csrf
                             @method('DELETE')
@@ -409,7 +590,6 @@
                             📋 Daftar Seluruh Jadwal Bel
                         </h4>
 
-                        <!-- FILTER DROPDOWN -->
                         <div class="flex items-center gap-2 w-full sm:w-auto">
                             <span class="text-xs text-slate-500 font-medium">Filter:</span>
                             <select id="filter-schedule-day" onchange="filterScheduleTable()" 
@@ -476,11 +656,25 @@
                                         <td class="p-3 font-medium text-slate-800 dark:text-slate-200">{{ $item->event_name }}</td>
                                         <td class="p-3 font-mono text-blue-600 dark:text-blue-400">{{ $item->audio_file }}</td>
                                         <td class="p-3 text-center">
-                                            <form action="{{ route('schedules.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Hapus jadwal ini?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="text-rose-600 dark:text-rose-400 hover:underline font-bold">Hapus</button>
-                                            </form>
+                                            <div class="flex items-center justify-center gap-2">
+                                                <!-- TOMBOL EDIT -->
+                                                <button onclick="openEditModal({{ json_encode($item) }})" class="text-blue-600 dark:text-blue-400 hover:underline font-bold">Edit</button>
+                                                <span class="text-slate-300 dark:text-slate-700">|</span>
+
+                                                <!-- TOMBOL SALIN / DUPLIKAT -->
+                                                <form action="{{ route('schedules.duplicate', $item->id) }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="text-indigo-600 dark:text-indigo-400 hover:underline font-bold" title="Duplikat jadwal ini">Salin</button>
+                                                </form>
+                                                <span class="text-slate-300 dark:text-slate-700">|</span>
+
+                                                <!-- TOMBOL HAPUS -->
+                                                <form action="{{ route('schedules.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Hapus jadwal ini?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="text-rose-600 dark:text-rose-400 hover:underline font-bold">Hapus</button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -493,10 +687,237 @@
         </div>
     </div>
 
+    <!-- MODAL POPUP 2: READ-ONLY MATRIX LIHAT SEMUA JADWAL (SENIN-SABTU) -->
+    <div id="modal-view-schedule" onclick="closeViewModalOnBackdrop(event)" class="fixed inset-0 bg-slate-950/70 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-6xl w-full max-h-[92vh] overflow-hidden flex flex-col shadow-2xl border border-slate-200 dark:border-slate-800 transition-colors duration-300">
+            
+            <!-- HEADER MODAL -->
+            <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-gradient-to-r from-blue-50 via-slate-50 to-indigo-50 dark:from-slate-900 dark:via-slate-850 dark:to-indigo-950/40">
+                <div class="flex items-center gap-3">
+                    <div class="p-2.5 bg-blue-600 text-white rounded-2xl shadow-md shadow-blue-500/20 text-lg no-print">
+                        👁️
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-lg text-slate-900 dark:text-white flex items-center gap-2">
+                            Matrix Pratinjau Jadwal Bel
+                            <span class="text-[10px] bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider no-print">Read-Only</span>
+                        </h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Peta seluruh kegiatan bel sekolah dari hari Senin hingga Sabtu</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-2 no-print">
+                    <!-- TOMBOL PRINT DI HEADER MODAL -->
+                    <a href="{{ route('schedules.print', ['mode' => $activeMode]) }}" target="_blank" class="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl transition-all shadow-sm flex items-center gap-1.5 inline-flex">
+                        🖨️ Cetak / Print
+                    </a>
+                    <button onclick="closeViewModal()" class="w-8 h-8 rounded-full bg-slate-200/60 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-300 font-bold flex items-center justify-center transition-all" title="Tutup (Esc)">&times;</button>
+                </div>
+            </div>
+
+            <!-- BODY MODAL MATRIX -->
+            <div class="p-6 overflow-y-auto">
+                @php
+                    $uniqueTimes = $allSchedules->pluck('time')->map(fn($t) => \Carbon\Carbon::parse($t)->format('H:i'))->unique()->sort()->values();
+                    $matrixDays = ['monday' => 'Senin', 'tuesday' => 'Selasa', 'wednesday' => 'Rabu', 'thursday' => 'Kamis', 'friday' => 'Jumat', 'saturday' => 'Sabtu'];
+                @endphp
+
+                <div class="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-x-auto shadow-sm bg-white dark:bg-slate-900">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <!-- HEADER TABEL HARI -->
+                        <thead>
+                            <tr class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white font-bold uppercase text-[11px] tracking-wider border-b border-slate-800">
+                                <th class="p-3.5 border-r border-slate-800 w-24 text-center bg-slate-950/80">
+                                    <div class="flex items-center justify-center gap-1">
+                                        <span>⏰</span> Jam
+                                    </div>
+                                </th>
+                                @foreach($matrixDays as $dayKey => $dayLabel)
+                                    <th class="p-3.5 border-r border-slate-800/60 text-center">
+                                        <div class="flex items-center justify-center gap-1.5">
+                                            <span>📅</span> {{ $dayLabel }}
+                                        </div>
+                                    </th>
+                                @endforeach
+                            </tr>
+                        </thead>
+
+                        <!-- BODY TABEL MATRIX -->
+                        <tbody class="divide-y divide-slate-100 dark:divide-slate-800/60">
+                            @forelse($uniqueTimes as $timeStr)
+                                <tr class="hover:bg-blue-50/30 dark:hover:bg-slate-800/30 transition-colors">
+                                    <!-- JAM COLUMN -->
+                                    <td class="p-3 font-mono font-extrabold text-slate-800 dark:text-white border-r border-slate-200 dark:border-slate-800 text-center bg-slate-50/80 dark:bg-slate-900/60">
+                                        <span class="inline-block bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 px-2.5 py-1 rounded-lg text-xs shadow-inner">
+                                            {{ $timeStr }}
+                                        </span>
+                                    </td>
+
+                                    <!-- DAYS COLUMNS -->
+                                    @foreach($matrixDays as $dayKey => $dayLabel)
+                                        @php
+                                            $matchingEvents = $allSchedules->filter(function($item) use ($dayKey, $timeStr) {
+                                                return strtolower($item->day) === $dayKey && \Carbon\Carbon::parse($item->time)->format('H:i') === $timeStr;
+                                            });
+                                        @endphp
+
+                                        <td class="p-2 border-r border-slate-200/60 dark:border-slate-800/50 align-top">
+                                            @if($matchingEvents->count() > 0)
+                                                @foreach($matchingEvents as $ev)
+                                                    @php
+                                                        $nameLower = strtolower($ev->event_name);
+
+                                                        // DEFAULT: Biru untuk KBM / Masuk
+                                                        $badgeStyle = "bg-blue-50 dark:bg-blue-950/40 border-blue-200 dark:border-blue-900/60 text-blue-950 dark:text-blue-200";
+                                                        $accentDot = "bg-blue-500";
+
+                                                        // KUNING: Event (Upacara, Literasi, Senam)
+                                                        if (stristr($nameLower, 'upacara') || stristr($nameLower, 'literasi') || stristr($nameLower, 'senam')) {
+                                                            $badgeStyle = "bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-900/60 text-amber-950 dark:text-amber-200";
+                                                            $accentDot = "bg-amber-500";
+                                                        } 
+                                                        // HIJAU: Dhuha / Tadris BTQ
+                                                        elseif (stristr($nameLower, 'dhuha') || stristr($nameLower, 'btq') || stristr($nameLower, 'tadris')) {
+                                                            $badgeStyle = "bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-900/60 text-emerald-950 dark:text-emerald-200";
+                                                            $accentDot = "bg-emerald-500";
+                                                        } 
+                                                        // MERAH: Pulang & Istirahat
+                                                        elseif (stristr($nameLower, 'pulang') || stristr($nameLower, 'istirahat')) {
+                                                            $badgeStyle = "bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-900/60 text-rose-950 dark:text-rose-200";
+                                                            $accentDot = "bg-rose-500";
+                                                        }
+                                                    @endphp
+
+                                                    <div class="print-badge p-2 mb-1 rounded-xl border shadow-sm transition-all hover:scale-[1.02] {{ $badgeStyle }}">
+                                                        <div class="flex items-center gap-1.5 mb-0.5">
+                                                            <span class="w-2 h-2 rounded-full {{ $accentDot }} no-print"></span>
+                                                            <span class="font-bold text-xs leading-snug">{{ $ev->event_name }}</span>
+                                                        </div>
+                                                        <div class="flex items-center justify-between gap-1 pt-0.5 border-t border-black/5 dark:border-white/5">
+                                                            <span class="text-[10px] font-mono opacity-75 truncate max-w-[90px]">🎵 {{ $ev->audio_file }}</span>
+                                                            @if($ev->variant !== 'default')
+                                                                <span class="text-[9px] font-extrabold uppercase bg-white/70 dark:bg-black/40 px-1 py-0.5 rounded text-slate-700 dark:text-slate-300">{{ $ev->variant }}</span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @else
+                                                <div class="h-full flex items-center justify-center py-2">
+                                                    <span class="text-slate-300 dark:text-slate-700 text-xs font-semibold">–</span>
+                                                </div>
+                                            @endif
+                                        </td>
+                                    @endforeach
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center py-12 text-slate-400 dark:text-slate-500 font-medium">
+                                        <div class="text-3xl mb-2">📭</div>
+                                        Belum ada jadwal bel yang diinputkan.
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- FOOTER MODAL PREVIEW -->
+            <div class="px-6 py-3.5 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/80 flex justify-between items-center no-print">
+                <div class="flex flex-wrap gap-4 text-[11px] font-medium text-slate-600 dark:text-slate-300">
+                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Masuk / KBM</span>
+                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Dhuha / Tadris BTQ</span>
+                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Event (Upacara, Literasi, Senam)</span>
+                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Pulang / Istirahat</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <a href="{{ route('schedules.print', ['mode' => $activeMode]) }}" target="_blank" class="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl transition-all shadow-sm flex items-center gap-1.5 inline-flex">
+                        🖨️ Cetak / Print
+                    </a>
+                    <button onclick="closeViewModal()" class="px-5 py-2 bg-slate-900 hover:bg-slate-800 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-bold text-xs rounded-xl transition-all shadow-sm">
+                        Tutup Pratinjau
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MODAL POPUP 3: EDIT JADWAL BEL -->
+    <div id="modal-edit-schedule" onclick="closeEditModalOnBackdrop(event)" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl max-w-2xl w-full flex flex-col shadow-2xl border border-slate-200 dark:border-slate-700 transition-colors duration-300 overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between bg-slate-50 dark:bg-slate-900/50">
+                <h3 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+                    ✏️ Edit Jadwal Bel Sekolah
+                </h3>
+                <button onclick="closeEditModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 font-bold text-xl" title="Tutup (Esc)">&times;</button>
+            </div>
+
+            <form id="form-edit-schedule" method="POST" class="p-6 space-y-4">
+                @csrf
+                @method('PUT')
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-xs font-bold text-slate-600 dark:text-slate-400 block mb-1">Hari</label>
+                        <select id="edit-day" name="day" class="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+                            <option value="monday">Senin</option>
+                            <option value="tuesday">Selasa</option>
+                            <option value="wednesday">Rabu</option>
+                            <option value="thursday">Kamis</option>
+                            <option value="friday">Jumat</option>
+                            <option value="saturday">Sabtu</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="text-xs font-bold text-slate-600 dark:text-slate-400 block mb-1">Varian Presets / Mode Bel</label>
+                        <select id="edit-variant" name="variant" class="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+                            <option value="default">Reguler Harian</option>
+                            <option value="puasa">🌙 Mode Bulan Puasa (Ramadhan)</option>
+                            <option value="jumat_jamaah">Jumat (Mode Jamaah)</option>
+                            <option value="jumat_ringkas">Jumat (Mode Ringkas/Air Minim)</option>
+                            <option value="asts">Mode ASTS (UTS)</option>
+                            <option value="asas">Mode ASAS (UAS)</option>
+                            <option value="ujian_sekolah">Mode Ujian Sekolah</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="text-xs font-bold text-slate-600 dark:text-slate-400 block mb-1">Jam Bel (HH:MM:SS)</label>
+                        <input type="time" id="edit-time" name="time" step="1" required class="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+                    </div>
+
+                    <div>
+                        <label class="text-xs font-bold text-slate-600 dark:text-slate-400 block mb-1">File Audio Sound</label>
+                        <select id="edit-audio-file" name="audio_file" class="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+                            @foreach($availableAudioFiles as $file)
+                                <option value="{{ $file }}">{{ $file }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label class="text-xs font-bold text-slate-600 dark:text-slate-400 block mb-1">Nama Agenda / Kegiatan</label>
+                        <input type="text" id="edit-event-name" name="event_name" required class="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-700">
+                    <button type="button" onclick="closeEditModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-bold text-xs rounded-xl transition-all">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md transition-all">
+                        Perbarui Jadwal
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <audio id="bel-audio-player" class="hidden"></audio>
 
     <script>
-        // MAPPER HARI INDONESIA JS
         function getIndonesianDay(dayName) {
             const daysMap = {
                 'monday': 'Senin',
@@ -510,7 +931,6 @@
             return daysMap[dayName.toLowerCase()] || dayName;
         }
 
-        // DARK / LIGHT MODE SWITCHER ENGINE
         function initTheme() {
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -535,7 +955,6 @@
         }
         initTheme();
 
-        // CORE ENGINE BEL & TIMERS
         let nextScheduleTime = null;
         let nextAudioFile = null;
         let hasPlayedCurrentBel = false;
@@ -545,7 +964,6 @@
 
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-        // KEEP-ALIVE SYSTEM
         let wakeLock = null;
         async function initKeepAlive() {
             try {
@@ -572,15 +990,38 @@
             if (document.visibilityState === 'visible' && wakeLock === null) initKeepAlive();
         });
 
+        // MODAL SETTING (KELOLA JADWAL)
         function openModal() { document.getElementById('modal-schedule').classList.remove('hidden'); }
         function closeModal() { document.getElementById('modal-schedule').classList.add('hidden'); }
+        function closeModalOnBackdrop(event) { if (event.target.id === 'modal-schedule') closeModal(); }
 
-        function closeModalOnBackdrop(event) {
-            if (event.target.id === 'modal-schedule') closeModal();
+        // MODAL PRATINJAU (LIHAT SEMUA JADWAL MATRIX)
+        function openViewModal() { document.getElementById('modal-view-schedule').classList.remove('hidden'); }
+        function closeViewModal() { document.getElementById('modal-view-schedule').classList.add('hidden'); }
+        function closeViewModalOnBackdrop(event) { if (event.target.id === 'modal-view-schedule') closeViewModal(); }
+
+        // MODAL EDIT
+        function openEditModal(schedule) {
+            const form = document.getElementById('form-edit-schedule');
+            form.action = `/schedules/${schedule.id}`;
+
+            document.getElementById('edit-day').value = schedule.day.toLowerCase();
+            document.getElementById('edit-variant').value = schedule.variant.toLowerCase();
+            document.getElementById('edit-time').value = schedule.time;
+            document.getElementById('edit-event-name').value = schedule.event_name;
+            document.getElementById('edit-audio-file').value = schedule.audio_file;
+
+            document.getElementById('modal-edit-schedule').classList.remove('hidden');
         }
+        function closeEditModal() { document.getElementById('modal-edit-schedule').classList.add('hidden'); }
+        function closeEditModalOnBackdrop(event) { if (event.target.id === 'modal-edit-schedule') closeEditModal(); }
 
         window.addEventListener('keydown', function (event) {
-            if (event.key === 'Escape' || event.key === 'Esc') closeModal();
+            if (event.key === 'Escape' || event.key === 'Esc') {
+                closeModal();
+                closeViewModal();
+                closeEditModal();
+            }
         });
 
         function updateClock() {
@@ -599,7 +1040,6 @@
                 const response = await fetch('/api/next-schedule');
                 const data = await response.json();
 
-                // --- PENANGANAN ROTASI AUDIO 5S PAGI (06.15 - 06.45 WIB) ---
                 if (data.audio_5s && data.audio_5s.active) {
                     current5sAudioFile = data.audio_5s.file;
                     if (!is5sCurrentlyPlaying && current5sAudioFile) {
@@ -613,7 +1053,6 @@
                     }
                 }
 
-                // --- PENANGANAN JADWAL REGULER ---
                 if (data.next_schedule) {
                     document.getElementById('next-event-title').innerText = data.next_schedule.event_name;
                     document.getElementById('next-event-audio').innerText = data.next_schedule.audio_file;
@@ -711,7 +1150,6 @@
             location.reload();
         }
 
-        // FUNGSI FILTER TABLE IN MODAL
         function filterScheduleTable() {
             const selectedDay = document.getElementById('filter-schedule-day').value;
             const selectedVariant = document.getElementById('filter-schedule-variant').value;

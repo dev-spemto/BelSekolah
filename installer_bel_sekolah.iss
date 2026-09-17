@@ -9,7 +9,7 @@ AppCopyright=© Tim IT SMP Muhammadiyah Tonjong
 
 ; === BYPASS ADMIN ACCESS & AUTO DUAL-ARCH (32-BIT / 64-BIT) ===
 PrivilegesRequired=lowest
-ArchitecturesInstallIn64BitMode=x64
+ArchitecturesInstallIn64BitMode=x64compatible
 DefaultDirName={userpf}\Spemto_BelSekolahOtomatis
 DefaultGroupName=Bel Sekolah Otomatis by SPEMTO
 
@@ -38,19 +38,22 @@ Name: "{userstartup}\BelSekolahRunner"; Filename: "{app}\run_background.vbs"; Ta
 
 [Run]
 ; Matikan instance PHP runner lama jika ada sebelum menjalankan yang baru
-Filename: "taskkill.exe"; Parameters: "/F /IM php.exe"; Flags: runhidden; RunOnceId: "KillOldPhpProcess"
+Filename: "taskkill.exe"; Parameters: "/F /IM php.exe"; Flags: runhidden
 
 ; Jalankan server di background dan buka antarmuka browser
 Filename: "{app}\run_background.vbs"; Description: "Jalankan Server Bel Sekolah sekarang"; Flags: postinstall shellexec runhidden
 Filename: "{code:GetBrowserPath}"; Parameters: "{code:GetBrowserParams}"; Description: "Buka Dashboard Bel Sekolah"; Flags: postinstall shellexec skipifsilent
 
 [UninstallRun]
-; Hentikan proses latar belakang saat uninstall dilakukan
-Filename: "taskkill.exe"; Parameters: "/F /IM php.exe"; Flags: runhidden
-Filename: "taskkill.exe"; Parameters: "/F /FI ""WINDOWTITLE eq BelSekolahRunner*"""; Flags: runhidden
+; Hentikan proses latar belakang PHP dan WScript saat uninstall dilakukan
+Filename: "taskkill.exe"; Parameters: "/F /IM php.exe"; Flags: runhidden; RunOnceId: "StopPhpProcessOnUninstall"
+Filename: "taskkill.exe"; Parameters: "/F /IM wscript.exe"; Flags: runhidden; RunOnceId: "StopWscriptProcessOnUninstall"
 
 [UninstallDelete]
 ; PEMBERSIHAN TOTAL: Hapus seluruh isi direktori {app} dan direktori itu sendiri
+Type: filesandordirs; Name: "{app}\storage\framework\views\*"
+Type: filesandordirs; Name: "{app}\storage\framework\cache\*"
+Type: filesandordirs; Name: "{app}\storage\framework\sessions\*"
 Type: filesandordirs; Name: "{app}\*"
 Type: dirifempty; Name: "{app}"
 
@@ -73,6 +76,7 @@ begin
   if FileExists(ExpandConstant('{commonpf64}\Google\Chrome\Application\chrome.exe')) then begin IsAppModeSupported := True; Result := ExpandConstant('{commonpf64}\Google\Chrome\Application\chrome.exe'); Exit; end;
   if FileExists(ExpandConstant('{commonpf32}\Google\Chrome\Application\chrome.exe')) then begin IsAppModeSupported := True; Result := ExpandConstant('{commonpf32}\Google\Chrome\Application\chrome.exe'); Exit; end;
   if FileExists(ExpandConstant('{userappdata}\Google\Chrome\Application\chrome.exe')) then begin IsAppModeSupported := True; Result := ExpandConstant('{userappdata}\Google\Chrome\Application\chrome.exe'); Exit; end;
+  if FileExists(ExpandConstant('{localappdata}\Google\Chrome\Application\chrome.exe')) then begin IsAppModeSupported := True; Result := ExpandConstant('{localappdata}\Google\Chrome\Application\chrome.exe'); Exit; end;
 
   // 2. Microsoft Edge (App Mode Supported)
   if RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\msedge.exe', '', Path) or

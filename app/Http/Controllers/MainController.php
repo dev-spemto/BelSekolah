@@ -85,7 +85,6 @@ class MainController extends Controller
         if (in_array($today, ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'])) {
             $savedDate = Setting::get('5s_assigned_date');
             
-            // Mengacak audio baru jika memasuki hari yang berbeda
             if ($savedDate !== $todayDate) {
                 $assignedAudio = $this->pickRandom5sAudio();
                 Setting::set('5s_today_audio', $assignedAudio);
@@ -94,7 +93,6 @@ class MainController extends Controller
 
             $audio5sToday = Setting::get('5s_today_audio');
 
-            // Cek jendela waktu aktif 5S Pagi
             if ($currentTime >= '06:15:00' && $currentTime < '06:45:00') {
                 $is5sActive = true;
             }
@@ -115,9 +113,9 @@ class MainController extends Controller
 
         $todaySchedules = $query->orderBy('time', 'asc')->get();
 
-        // Injeksi jadwal Lagu Indonesia Raya secara sistematis jam 10:00 WIB (Senin-Sabtu)
-        $hasIndonesiaRaya = $todaySchedules->contains(fn($item) => $item->time === '10:00:00');
-        if (!$hasIndonesiaRaya && in_array($today, ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'])) {
+        // Injeksi jadwal Lagu Indonesia Raya (Jam 10:00 WIB) HANYA untuk Mode REGULER
+        $hasIndonesiaRaya = $todaySchedules->contains(fn($item) => Carbon::parse($item->time)->format('H:i:s') === '10:00:00');
+        if (!$hasIndonesiaRaya && $activeMode === 'regular' && in_array($today, ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'])) {
             $autoIndonesiaRaya = new Schedule([
                 'id' => 9999,
                 'day' => $today,
@@ -128,11 +126,26 @@ class MainController extends Controller
                 'is_active' => true
             ]);
             $todaySchedules->push($autoIndonesiaRaya);
-            $todaySchedules = $todaySchedules->sortBy('time')->values();
+            $todaySchedules = $todaySchedules->sortBy(fn($item) => Carbon::parse($item->time)->format('H:i:s'))->values();
         }
 
-        // Ambil bel berikutnya dari waktu saat ini
-        $nextSchedule = $todaySchedules->first(fn($item) => $item->time > $currentTime);
+        // --- 3. ROTASI AUTOMATIS AUDIO UNTUK BEL ISTIRAHAT DAN PULANG ---
+        foreach ($todaySchedules as $schedule) {
+            $audioLower = strtolower($schedule->audio_file);
+            
+            if ($audioLower === 'bel_istirahat.mp3' || stristr($schedule->event_name, 'istirahat')) {
+                $schedule->audio_file = $this->pickRandomNationalAudio('istirahat');
+            }
+            elseif ($audioLower === 'bel_pulang.mp3' || stristr($schedule->event_name, 'pulang')) {
+                $schedule->audio_file = $this->pickRandomNationalAudio('pulang');
+            }
+        }
+
+        // --- 4. PENENTUAN JADWAL BERIKUTNYA SECARA PRESISI ---
+        $nextSchedule = $todaySchedules->first(function ($item) use ($currentTime) {
+            $itemTime = Carbon::parse($item->time)->format('H:i:s');
+            return $itemTime > $currentTime;
+        });
 
         return response()->json([
             'current_time' => $currentTime,
@@ -150,9 +163,6 @@ class MainController extends Controller
         ]);
     }
 
-    /**
-     * Memilih audio 5S acak tanpa pengulangan hingga semua file dalam daftar pernah diputar.
-     */
     private function pickRandom5sAudio()
     {
         $allPlaylist = [
@@ -167,7 +177,6 @@ class MainController extends Controller
         $playedHistory = json_decode(Setting::get('5s_played_history', '[]'), true);
         $remaining = array_values(array_diff($allPlaylist, $playedHistory));
 
-        // Reset riwayat jika seluruh playlist sudah pernah diputar
         if (empty($remaining)) {
             $playedHistory = [];
             $remaining = $allPlaylist;
@@ -178,6 +187,109 @@ class MainController extends Controller
         Setting::set('5s_played_history', json_encode($playedHistory));
 
         return $selected;
+    }
+
+    private function pickRandomNationalAudio($type = 'istirahat')
+    {
+        $allPlaylist = [
+            'garuda_pancasila.mp3',
+            'gundul_pacul.mp3',
+            'halo_halo_bandung.mp3',
+            'suwe_ora_jamu.mp3',
+            'berkibarlah_benderaku.mp3',
+            'maju_tak_gentar.mp3',
+            'ampar_ampar_pisang.mp3',
+            'manuk_dadali.mp3',
+            'rayuan_pulau_kelapa.mp3',
+            'kicir_kicir.mp3'
+        ];
+
+        $settingKeyDate = "national_{$type}_assigned_date";
+        $settingKeyAudio = "national_{$type}_today_audio";
+        $settingKeyHistory = "national_{$type}_played_history";
+
+        $todayDate = Carbon::now()->format('Y-m-d');
+        $savedDate = Setting::get($settingKeyDate);
+
+        if ($savedDate !== $todayDate || !Setting::get($settingKeyAudio)) {
+            $playedHistory = json_decode(Setting::get($settingKeyHistory, '[]'), true);
+            $remaining = array_values(array_diff($allPlaylist, $playedHistory));
+
+            if (empty($remaining)) {
+                $playedHistory = [];
+                $remaining = $allPlaylist;
+            }
+
+            $selected = $remaining[array_rand($remaining)];
+            $playedHistory[] = $selected;
+
+            Setting::set($settingKeyAudio, $selected);
+            Setting::set($settingKeyDate, $todayDate);
+            Setting::set($settingKeyHistory, json_encode($playedHistory));
+        }
+
+        return Setting::get($settingKeyAudio);
+    }
+
+    // === METHOD SAVE / EXPORT CONFIGURATION (DOWNLOAD JSON) ===
+    public function exportConfig()
+    {
+        $schedules = Schedule::all(['day', 'variant', 'time', 'event_name', 'audio_file', 'is_active']);
+        $settings = [
+            'active_mode' => Setting::get('active_mode', 'regular'),
+            'jumat_mode' => Setting::get('jumat_mode', 'jamaah'),
+        ];
+
+        $exportData = [
+            'app' => 'Bel Sekolah Otomatis SPEMTO',
+            'version' => '1.0',
+            'exported_at' => Carbon::now()->toDateTimeString(),
+            'settings' => $settings,
+            'schedules' => $schedules
+        ];
+
+        $fileName = 'backup_jadwal_spemto_' . Carbon::now()->format('Y-m-d_His') . '.json';
+
+        return response()->streamDownload(function () use ($exportData) {
+            echo json_encode($exportData, JSON_PRETTY_PRINT);
+        }, $fileName, ['Content-Type' => 'application/json']);
+    }
+
+    // === METHOD LOAD / IMPORT CONFIGURATION (UPLOAD JSON) ===
+    public function importConfig(Request $request)
+    {
+        $request->validate([
+            'config_file' => 'required|file|mimes:json,txt|max:2048'
+        ]);
+
+        $content = file_get_contents($request->file('config_file')->getRealPath());
+        $data = json_decode($content, true);
+
+        if (!$data || !isset($data['schedules'])) {
+            return redirect()->back()->with('error', 'Format file backup JSON tidak valid!');
+        }
+
+        if (isset($data['settings']['active_mode'])) {
+            Setting::set('active_mode', $data['settings']['active_mode']);
+        }
+        if (isset($data['settings']['jumat_mode'])) {
+            Setting::set('jumat_mode', $data['settings']['jumat_mode']);
+        }
+
+        Schedule::truncate();
+
+        foreach ($data['schedules'] as $item) {
+            Schedule::create([
+                'day' => $item['day'],
+                'variant' => $item['variant'],
+                'time' => $item['time'],
+                'event_name' => $item['event_name'],
+                'audio_file' => $item['audio_file'],
+                'is_active' => $item['is_active'] ?? true,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Berhasil memuat konfigurasi! Seluruh jadwal bel telah dipulihkan.');
     }
 
     public function toggleActiveMode(Request $request)
@@ -222,6 +334,90 @@ class MainController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Jadwal bel berhasil ditambahkan!');
+    }
+
+    public function updateSchedule(Request $request, $id)
+    {
+        $request->validate([
+            'day' => 'required',
+            'variant' => 'required',
+            'time' => 'required',
+            'event_name' => 'required',
+            'audio_file' => 'required',
+        ]);
+
+        $schedule = Schedule::findOrFail($id);
+        $schedule->update([
+            'day' => $request->day,
+            'variant' => $request->variant,
+            'time' => $request->time,
+            'event_name' => $request->event_name,
+            'audio_file' => $request->audio_file,
+        ]);
+
+        return redirect()->back()->with('success', 'Jadwal bel berhasil diperbarui!');
+    }
+
+    // === METHOD DUPLIKASI SINGLE JADWAL ===
+    public function duplicateSchedule($id)
+    {
+        $schedule = Schedule::findOrFail($id);
+        $newSchedule = $schedule->replicate();
+        $newSchedule->save();
+
+        return redirect()->back()->with('success', 'Jadwal bel berhasil disalin!');
+    }
+
+    // === METHOD SALIN JADWAL DENGAN PEMISAHAN VARIAN ASAL DAN TUJUAN ===
+    public function copyDaySchedule(Request $request)
+    {
+        $request->validate([
+            'from_day'     => 'required',
+            'from_variant' => 'required',
+            'to_day'       => 'required',
+            'to_variant'   => 'required',
+        ]);
+
+        $fromDay     = $request->from_day;
+        $fromVariant = $request->from_variant;
+        $toDay       = $request->to_day;
+        $toVariant   = $request->to_variant;
+
+        if ($fromDay === $toDay && $fromVariant === $toVariant) {
+            return redirect()->back()->with('error', 'Hari dan varian asal tidak boleh sama persis dengan tujuan.');
+        }
+
+        // 1. Ambil data dari lokasi asal
+        $query = Schedule::where('day', $fromDay);
+        if ($fromVariant !== 'all') {
+            $query->where('variant', $fromVariant);
+        }
+        $sourceSchedules = $query->get();
+
+        if ($sourceSchedules->isEmpty()) {
+            return redirect()->back()->with('error', 'Tidak ada jadwal pada hari dan varian asal yang dapat disalin.');
+        }
+
+        // 2. Bersihkan jadwal pada lokasi tujuan sebelum ditimpa
+        $targetQuery = Schedule::where('day', $toDay);
+        if ($toVariant !== 'all') {
+            $targetQuery->where('variant', $toVariant);
+        }
+        $targetQuery->delete();
+
+        // 3. Masukkan data hasil salinan ke lokasi tujuan
+        foreach ($sourceSchedules as $item) {
+            Schedule::create([
+                'day'        => $toDay,
+                'variant'    => ($toVariant === 'all') ? $item->variant : $toVariant,
+                'time'       => $item->time,
+                'event_name' => $item->event_name,
+                'audio_file' => $item->audio_file,
+                'is_active'  => $item->is_active,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Berhasil menyalin jadwal ke hari dan varian tujuan!');
     }
 
     public function destroySchedule($id)
