@@ -1,0 +1,1315 @@
+{
+    "app": "Bel Sekolah Otomatis SPEMTO",
+    "version": "1.0",
+    "exported_at": "2026-09-18 20:16:35",
+    "settings": {
+        "active_mode": "regular",
+        "jumat_mode": "jamaah"
+    },
+    "schedules": [
+        {
+            "day": "monday",
+            "variant": "default",
+            "time": "07:00:00",
+            "event_name": "Upacara (0A)",
+            "audio_file": "Upacara.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "default",
+            "time": "07:35:00",
+            "event_name": "Dhuha / Tadris BTQ (J1)",
+            "audio_file": "Kerohanian.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "default",
+            "time": "08:15:00",
+            "event_name": "Mapel Pertama (J2)",
+            "audio_file": "Jam Pertama.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "default",
+            "time": "08:55:00",
+            "event_name": "Mapel Kedua (J3)",
+            "audio_file": "Jam Kedua.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "default",
+            "time": "09:35:00",
+            "event_name": "Istirahat pertama",
+            "audio_file": "Istirahat Pertama.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "default",
+            "time": "09:55:00",
+            "event_name": "Mapel Ketiga (J4)",
+            "audio_file": "Jam Ketiga.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "default",
+            "time": "10:35:00",
+            "event_name": "Mapel Keempat (J5)",
+            "audio_file": "Jam Keempat.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "default",
+            "time": "11:15:00",
+            "event_name": "Mapel Kelima (J6)",
+            "audio_file": "Jam Kelima.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "default",
+            "time": "11:50:00",
+            "event_name": "Istirahat Kedua",
+            "audio_file": "Istirahat Kedua.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "default",
+            "time": "12:20:00",
+            "event_name": "Mapel Keenam (J7)",
+            "audio_file": "Jam Keenam.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "default",
+            "time": "12:55:00",
+            "event_name": "Pulang",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "default",
+            "time": "07:00:00",
+            "event_name": "Dhuha / Tadris BTQ (J1)",
+            "audio_file": "Kerohanian.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "default",
+            "time": "07:35:00",
+            "event_name": "Mapel Pertama (J2)",
+            "audio_file": "Jam Pertama.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "default",
+            "time": "08:10:00",
+            "event_name": "Mapel Kedua (J3)",
+            "audio_file": "Jam Kedua.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "default",
+            "time": "08:45:00",
+            "event_name": "Mapel ketiga (J4)",
+            "audio_file": "Jam Ketiga.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "default",
+            "time": "09:20:00",
+            "event_name": "Istirahat pertama",
+            "audio_file": "Istirahat Pertama.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "default",
+            "time": "09:40:00",
+            "event_name": "Mapel Keempat (J5)",
+            "audio_file": "Jam Keempat.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "default",
+            "time": "10:15:00",
+            "event_name": "Mapel Kelima (J6)",
+            "audio_file": "Jam Kelima.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "default",
+            "time": "10:50:00",
+            "event_name": "Mapel Keenam (J7)",
+            "audio_file": "Jam Keenam.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "default",
+            "time": "11:20:00",
+            "event_name": "Mapel Ketujuh (J8)",
+            "audio_file": "Jam Ketujuh.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "default",
+            "time": "11:50:00",
+            "event_name": "Istirahat Kedua",
+            "audio_file": "Istirahat Kedua.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "default",
+            "time": "12:20:00",
+            "event_name": "Mapel Kedelapan (J9)",
+            "audio_file": "Jam Kedelapan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "default",
+            "time": "13:00:00",
+            "event_name": "Pulang",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "default",
+            "time": "07:00:00",
+            "event_name": "Dhuha / Tadris BTQ (J1)",
+            "audio_file": "Kerohanian.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "default",
+            "time": "07:35:00",
+            "event_name": "Mapel Pertama (J2)",
+            "audio_file": "Jam Pertama.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "default",
+            "time": "08:10:00",
+            "event_name": "Mapel Kedua (J3)",
+            "audio_file": "Jam Kedua.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "default",
+            "time": "08:45:00",
+            "event_name": "Mapel ketiga (J4)",
+            "audio_file": "Jam Ketiga.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "default",
+            "time": "09:20:00",
+            "event_name": "Istirahat pertama",
+            "audio_file": "Istirahat Pertama.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "default",
+            "time": "09:40:00",
+            "event_name": "Mapel Keempat (J5)",
+            "audio_file": "Jam Keempat.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "default",
+            "time": "10:15:00",
+            "event_name": "Mapel Kelima (J6)",
+            "audio_file": "Jam Kelima.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "default",
+            "time": "10:50:00",
+            "event_name": "Mapel Keenam (J7)",
+            "audio_file": "Jam Keenam.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "default",
+            "time": "11:20:00",
+            "event_name": "Mapel Ketujuh (J8)",
+            "audio_file": "Jam Ketujuh.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "default",
+            "time": "11:50:00",
+            "event_name": "Istirahat Kedua",
+            "audio_file": "Istirahat Kedua.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "default",
+            "time": "12:20:00",
+            "event_name": "Mapel Kedelapan (J9)",
+            "audio_file": "Jam Kedelapan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "default",
+            "time": "13:00:00",
+            "event_name": "Pulang",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "default",
+            "time": "07:00:00",
+            "event_name": "Dhuha / Tadris BTQ (J1)",
+            "audio_file": "Kerohanian.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "default",
+            "time": "07:35:00",
+            "event_name": "Mapel Pertama (J2)",
+            "audio_file": "Jam Pertama.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "default",
+            "time": "08:15:00",
+            "event_name": "Mapel Kedua (J3)",
+            "audio_file": "Jam Kedua.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "default",
+            "time": "08:55:00",
+            "event_name": "Mapel Ketiga (J4)",
+            "audio_file": "Jam Ketiga.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "default",
+            "time": "09:35:00",
+            "event_name": "Istirahat pertama",
+            "audio_file": "Istirahat Pertama.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "default",
+            "time": "09:55:00",
+            "event_name": "Mapel Keempat (J5)",
+            "audio_file": "Jam Keempat.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "default",
+            "time": "10:35:00",
+            "event_name": "Mapel Kelima (J6)",
+            "audio_file": "Jam Kelima.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "default",
+            "time": "11:15:00",
+            "event_name": "Mapel Keenam (J7)",
+            "audio_file": "Jam Keenam.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "default",
+            "time": "11:50:00",
+            "event_name": "Istirahat Kedua",
+            "audio_file": "Istirahat Kedua.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "default",
+            "time": "12:20:00",
+            "event_name": "Mapel Ketujuh (J8)",
+            "audio_file": "Jam Ketujuh.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "default",
+            "time": "12:55:00",
+            "event_name": "Pulang",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "jumat_jamaah",
+            "time": "07:00:00",
+            "event_name": "Dhuha / Tadris BTQ (J1)",
+            "audio_file": "Kerohanian.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "jumat_jamaah",
+            "time": "07:35:00",
+            "event_name": "Mapel Pertama (J2)",
+            "audio_file": "Jam Pertama.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "jumat_jamaah",
+            "time": "08:15:00",
+            "event_name": "Mapel Kedua (J3)",
+            "audio_file": "Jam Kedua.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "jumat_jamaah",
+            "time": "08:55:00",
+            "event_name": "Mapel Ketiga (J4)",
+            "audio_file": "Jam Ketiga.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "jumat_jamaah",
+            "time": "09:35:00",
+            "event_name": "Istirahat pertama",
+            "audio_file": "Istirahat Pertama.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "jumat_jamaah",
+            "time": "09:55:00",
+            "event_name": "Mapel Keempat (J5)",
+            "audio_file": "Jam Keempat.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "jumat_jamaah",
+            "time": "10:35:00",
+            "event_name": "Mapel Kelima (J6)",
+            "audio_file": "Jam Kelima.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "jumat_jamaah",
+            "time": "11:15:00",
+            "event_name": "Istirahat Kedua (Shalat Jum'at)",
+            "audio_file": "Sholat Jumat.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "jumat_jamaah",
+            "time": "12:20:00",
+            "event_name": "Mapel Keenam (J7)",
+            "audio_file": "Jam Keenam.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "jumat_jamaah",
+            "time": "13:00:00",
+            "event_name": "Pulang",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "jumat_ringkas",
+            "time": "07:00:00",
+            "event_name": "Dhuha / Tadris BTQ (J1)",
+            "audio_file": "Kerohanian.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "jumat_ringkas",
+            "time": "07:35:00",
+            "event_name": "Mapel Pertama (J2)",
+            "audio_file": "Jam Pertama.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "jumat_ringkas",
+            "time": "08:15:00",
+            "event_name": "Mapel Kedua (J3)",
+            "audio_file": "Jam Kedua.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "jumat_ringkas",
+            "time": "08:55:00",
+            "event_name": "Mapel Ketiga (J4)",
+            "audio_file": "Jam Ketiga.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "jumat_ringkas",
+            "time": "09:35:00",
+            "event_name": "Istirahat pertama",
+            "audio_file": "Istirahat Pertama.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "jumat_ringkas",
+            "time": "09:55:00",
+            "event_name": "Mapel Keempat (J5)",
+            "audio_file": "Jam Keempat.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "jumat_ringkas",
+            "time": "10:35:00",
+            "event_name": "Mapel Kelima (J6)",
+            "audio_file": "Jam Kelima.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "jumat_ringkas",
+            "time": "11:00:00",
+            "event_name": "Pulang (Jum'atan di Rumah)",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "default",
+            "time": "07:00:00",
+            "event_name": "Senam & Kebersihan (J1)",
+            "audio_file": "Jam Pertama.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "default",
+            "time": "07:40:00",
+            "event_name": "Dhuha / Tadris BTQ (J2)",
+            "audio_file": "Kerohanian.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "default",
+            "time": "08:10:00",
+            "event_name": "Mapel Pertama (J3)",
+            "audio_file": "Jam Pertama.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "default",
+            "time": "08:50:00",
+            "event_name": "Mapel Kedua (J4)",
+            "audio_file": "Jam Kedua.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "default",
+            "time": "09:30:00",
+            "event_name": "Istirahat pertama",
+            "audio_file": "Istirahat Pertama.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "default",
+            "time": "09:50:00",
+            "event_name": "Mapel Ketiga (J5)",
+            "audio_file": "Jam Ketiga.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "default",
+            "time": "10:30:00",
+            "event_name": "Literasi (J6)",
+            "audio_file": "Kerohanian.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "default",
+            "time": "11:10:00",
+            "event_name": "Mapel Keempat (J7)",
+            "audio_file": "Jam Keempat.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "default",
+            "time": "11:50:00",
+            "event_name": "Istirahat Kedua",
+            "audio_file": "Istirahat Kedua.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "default",
+            "time": "12:20:00",
+            "event_name": "Mapel Kelima (J8)",
+            "audio_file": "Jam Kelima.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "default",
+            "time": "13:00:00",
+            "event_name": "Pulang",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "asts",
+            "time": "07:25:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASTS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "asts",
+            "time": "07:30:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASTS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "asts",
+            "time": "09:25:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASTS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "asts",
+            "time": "09:30:00",
+            "event_name": "Waktu Habis",
+            "audio_file": "ASTS 1_Waktu Habis.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "asts",
+            "time": "09:55:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASTS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "asts",
+            "time": "10:00:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASTS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "asts",
+            "time": "11:55:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASTS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "asts",
+            "time": "12:00:00",
+            "event_name": "Pulang",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "asts",
+            "time": "07:25:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASTS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "asts",
+            "time": "07:30:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASTS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "asts",
+            "time": "09:25:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASTS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "asts",
+            "time": "09:30:00",
+            "event_name": "Waktu Habis",
+            "audio_file": "ASTS 1_Waktu Habis.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "asts",
+            "time": "09:55:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASTS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "asts",
+            "time": "10:00:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASTS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "asts",
+            "time": "11:55:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASTS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "asts",
+            "time": "12:00:00",
+            "event_name": "Pulang",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "asts",
+            "time": "07:25:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASTS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "asts",
+            "time": "07:30:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASTS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "asts",
+            "time": "09:25:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASTS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "asts",
+            "time": "09:30:00",
+            "event_name": "Waktu Habis",
+            "audio_file": "ASTS 1_Waktu Habis.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "asts",
+            "time": "09:55:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASTS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "asts",
+            "time": "10:00:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASTS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "asts",
+            "time": "11:55:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASTS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "asts",
+            "time": "12:00:00",
+            "event_name": "Pulang",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "asts",
+            "time": "07:25:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASTS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "asts",
+            "time": "07:30:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASTS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "asts",
+            "time": "09:25:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASTS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "asts",
+            "time": "09:30:00",
+            "event_name": "Waktu Habis",
+            "audio_file": "ASTS 1_Waktu Habis.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "asts",
+            "time": "09:55:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASTS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "asts",
+            "time": "10:00:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASTS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "asts",
+            "time": "11:55:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASTS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "asts",
+            "time": "12:00:00",
+            "event_name": "Pulang",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "asts",
+            "time": "07:25:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASTS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "asts",
+            "time": "07:30:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASTS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "asts",
+            "time": "09:25:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASTS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "asts",
+            "time": "09:30:00",
+            "event_name": "Waktu Habis",
+            "audio_file": "ASTS 1_Waktu Habis.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "asts",
+            "time": "09:55:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASTS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "asts",
+            "time": "10:00:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASTS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "asts",
+            "time": "11:55:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASTS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "asts",
+            "time": "12:00:00",
+            "event_name": "Pulang",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "asts",
+            "time": "07:25:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASTS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "asts",
+            "time": "07:30:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASTS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "asts",
+            "time": "09:25:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASTS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "asts",
+            "time": "09:30:00",
+            "event_name": "Pulang",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "asas",
+            "time": "07:25:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASAS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "asas",
+            "time": "07:30:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASAS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "asas",
+            "time": "09:25:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASAS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "asas",
+            "time": "09:30:00",
+            "event_name": "Waktu Habis",
+            "audio_file": "ASAS 1_Waktu Habis.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "asas",
+            "time": "09:55:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASAS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "asas",
+            "time": "10:00:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASAS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "asas",
+            "time": "11:55:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASAS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "monday",
+            "variant": "asas",
+            "time": "12:00:00",
+            "event_name": "Pulang",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "asas",
+            "time": "07:25:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASAS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "asas",
+            "time": "07:30:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASAS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "asas",
+            "time": "09:25:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASAS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "asas",
+            "time": "09:30:00",
+            "event_name": "Waktu Habis",
+            "audio_file": "ASAS 1_Waktu Habis.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "asas",
+            "time": "09:55:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASAS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "asas",
+            "time": "10:00:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASAS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "asas",
+            "time": "11:55:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASAS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "tuesday",
+            "variant": "asas",
+            "time": "12:00:00",
+            "event_name": "Pulang",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "asas",
+            "time": "07:25:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASAS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "asas",
+            "time": "07:30:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASAS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "asas",
+            "time": "09:25:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASAS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "asas",
+            "time": "09:30:00",
+            "event_name": "Waktu Habis",
+            "audio_file": "ASAS 1_Waktu Habis.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "asas",
+            "time": "09:55:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASAS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "asas",
+            "time": "10:00:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASAS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "asas",
+            "time": "11:55:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASAS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "wednesday",
+            "variant": "asas",
+            "time": "12:00:00",
+            "event_name": "Pulang",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "asas",
+            "time": "07:25:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASAS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "asas",
+            "time": "07:30:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASAS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "asas",
+            "time": "09:25:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASAS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "asas",
+            "time": "09:30:00",
+            "event_name": "Waktu Habis",
+            "audio_file": "ASAS 1_Waktu Habis.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "asas",
+            "time": "09:55:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASAS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "asas",
+            "time": "10:00:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASAS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "asas",
+            "time": "11:55:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASAS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "thursday",
+            "variant": "asas",
+            "time": "12:00:00",
+            "event_name": "Pulang",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "asas",
+            "time": "07:25:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASAS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "asas",
+            "time": "07:30:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASAS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "asas",
+            "time": "09:25:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASAS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "asas",
+            "time": "09:30:00",
+            "event_name": "Waktu Habis",
+            "audio_file": "ASAS 1_Waktu Habis.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "asas",
+            "time": "09:55:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASAS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "asas",
+            "time": "10:00:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASAS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "asas",
+            "time": "11:55:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASAS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "saturday",
+            "variant": "asas",
+            "time": "12:00:00",
+            "event_name": "Pulang",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "asas",
+            "time": "07:25:00",
+            "event_name": "Masuk Ruangan",
+            "audio_file": "ASAS 1_Masuk Ruangan.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "asas",
+            "time": "07:30:00",
+            "event_name": "Mulai Tes",
+            "audio_file": "ASAS 1_Mulai.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "asas",
+            "time": "09:25:00",
+            "event_name": "Kurang 5 Menit",
+            "audio_file": "ASAS 1_Kurang 5 Menit.mp3",
+            "is_active": true
+        },
+        {
+            "day": "friday",
+            "variant": "asas",
+            "time": "09:30:00",
+            "event_name": "Pulang",
+            "audio_file": "Pulang.mp3",
+            "is_active": true
+        }
+    ]
+}
