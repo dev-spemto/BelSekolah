@@ -9,7 +9,8 @@
     <!-- FAVICON BROWSER -->
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- TAILWIND JS LOKAL (OFFLINE-SAFE) -->
+    <script src="{{ asset('js/tailwind.js') }}"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -28,9 +29,12 @@
             }
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS KHUSUS PRINT & FONT SYSTEM (OFFLINE-SAFE) -->
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+        }
 
         /* CSS KHUSUS PRINT (A4 LANDSCAPE & FIT 1 HALAMAN) */
         @media print {
@@ -119,7 +123,7 @@
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
                 <div class="flex items-center gap-3">
                     
-                    <!-- LOGO SEKOLAH (Menggantikan Emoji Lonceng 🔔) -->
+                    <!-- LOGO SEKOLAH -->
                     <div class="p-1.5 bg-white dark:bg-slate-700 rounded-2xl shadow-md border border-slate-100 dark:border-slate-600 flex items-center justify-center">
                         <img src="{{ asset('images/logo.png') }}" alt="Logo SPEMTO" class="h-10 w-auto object-contain">
                     </div>
@@ -341,7 +345,7 @@
         </main>
     </div>
 
-    <!-- FOOTER WITH COPYRIGHT & CONTACT INFO -->
+    <!-- FOOTER -->
     <footer class="bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 mt-12 py-6 px-6 transition-colors duration-300">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
             <div>
@@ -399,7 +403,7 @@
                     </div>
                 </div>
 
-                <!-- PANEL SALIN JADWAL (HARI & VARIAN SEPARATED) -->
+                <!-- PANEL SALIN JADWAL -->
                 <div class="bg-indigo-50/60 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-900/40 rounded-xl p-4 space-y-3">
                     <h4 class="font-bold text-xs text-indigo-900 dark:text-indigo-300 uppercase tracking-wider flex items-center gap-1">
                         <span>📋</span> Salin / Duplikat Jadwal Bel (Hari & Varian)
@@ -411,8 +415,6 @@
                     <form action="{{ route('schedules.copyDay') }}" method="POST" onsubmit="return confirm('Salin jadwal ke lokasi tujuan? Jadwal pada lokasi tujuan akan diperbarui.')">
                         @csrf
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-center">
-                            
-                            <!-- DARI HARI -->
                             <div>
                                 <label class="text-[10px] font-bold text-indigo-900 dark:text-indigo-300 block mb-1 uppercase">Dari Hari (Asal)</label>
                                 <select name="from_day" required class="w-full text-xs p-2 rounded-lg border border-indigo-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
@@ -425,7 +427,6 @@
                                 </select>
                             </div>
 
-                            <!-- DARI VARIAN -->
                             <div>
                                 <label class="text-[10px] font-bold text-indigo-900 dark:text-indigo-300 block mb-1 uppercase">Dari Varian</label>
                                 <select name="from_variant" required class="w-full text-xs p-2 rounded-lg border border-indigo-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
@@ -439,7 +440,6 @@
                                 </select>
                             </div>
 
-                            <!-- KE HARI -->
                             <div>
                                 <label class="text-[10px] font-bold text-indigo-900 dark:text-indigo-300 block mb-1 uppercase">Ke Hari (Tujuan)</label>
                                 <select name="to_day" required class="w-full text-xs p-2 rounded-lg border border-indigo-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
@@ -452,7 +452,6 @@
                                 </select>
                             </div>
 
-                            <!-- KE VARIAN -->
                             <div>
                                 <label class="text-[10px] font-bold text-indigo-900 dark:text-indigo-300 block mb-1 uppercase">Ke Varian</label>
                                 <select name="to_variant" required class="w-full text-xs p-2 rounded-lg border border-indigo-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
@@ -466,7 +465,6 @@
                                 </select>
                             </div>
 
-                            <!-- TOMBOL SUBMIT -->
                             <div class="lg:pt-5">
                                 <button type="submit" class="w-full py-2 px-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl shadow-sm transition-all whitespace-nowrap">
                                     🔄 Salin Jadwal
@@ -660,18 +658,15 @@
                                         <td class="p-3 font-mono text-blue-600 dark:text-blue-400">{{ $item->audio_file }}</td>
                                         <td class="p-3 text-center">
                                             <div class="flex items-center justify-center gap-2">
-                                                <!-- TOMBOL EDIT -->
                                                 <button onclick="openEditModal({{ json_encode($item) }})" class="text-blue-600 dark:text-blue-400 hover:underline font-bold">Edit</button>
                                                 <span class="text-slate-300 dark:text-slate-700">|</span>
 
-                                                <!-- TOMBOL SALIN / DUPLIKAT -->
                                                 <form action="{{ route('schedules.duplicate', $item->id) }}" method="POST">
                                                     @csrf
                                                     <button type="submit" class="text-indigo-600 dark:text-indigo-400 hover:underline font-bold" title="Duplikat jadwal ini">Salin</button>
                                                 </form>
                                                 <span class="text-slate-300 dark:text-slate-700">|</span>
 
-                                                <!-- TOMBOL HAPUS -->
                                                 <form action="{{ route('schedules.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Hapus jadwal ini?')">
                                                     @csrf
                                                     @method('DELETE')
@@ -690,7 +685,7 @@
         </div>
     </div>
 
-    <!-- MODAL POPUP 2: READ-ONLY MATRIX LIHAT SEMUA JADWAL (SENIN-SABTU) -->
+    <!-- MODAL POPUP 2: READ-ONLY MATRIX LIHAT SEMUA JADWAL -->
     <div id="modal-view-schedule" onclick="closeViewModalOnBackdrop(event)" class="fixed inset-0 bg-slate-950/70 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-6xl w-full max-h-[92vh] overflow-hidden flex flex-col shadow-2xl border border-slate-200 dark:border-slate-800 transition-colors duration-300">
             
@@ -710,7 +705,6 @@
                 </div>
                 
                 <div class="flex items-center gap-3 no-print">
-                    <!-- DROPDOWN FILTER VARIAN PRATINJAU -->
                     <div class="flex items-center gap-2 bg-white dark:bg-slate-800 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
                         <label for="previewVariantFilter" class="text-xs font-bold text-slate-600 dark:text-slate-300">Filter Varian:</label>
                         <select id="previewVariantFilter" onchange="filterMatrixPreview(this.value)" class="text-xs font-bold rounded-lg border-none bg-transparent text-slate-800 dark:text-white focus:ring-0 cursor-pointer outline-none">
@@ -724,7 +718,6 @@
                         </select>
                     </div>
 
-                    <!-- TOMBOL PRINT DI HEADER MODAL -->
                     <a href="{{ route('schedules.print', ['mode' => $activeMode]) }}" target="_blank" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl transition-all shadow-sm flex items-center gap-1.5 inline-flex">
                         🖨️ Cetak / Print
                     </a>
@@ -741,7 +734,6 @@
 
                 <div class="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-x-auto shadow-sm bg-white dark:bg-slate-900">
                     <table class="w-full text-left text-xs border-collapse">
-                        <!-- HEADER TABEL HARI -->
                         <thead>
                             <tr class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white font-bold uppercase text-[11px] tracking-wider border-b border-slate-800">
                                 <th class="p-3.5 border-r border-slate-800 w-24 text-center bg-slate-950/80">
@@ -759,18 +751,15 @@
                             </tr>
                         </thead>
 
-                        <!-- BODY TABEL MATRIX -->
                         <tbody class="divide-y divide-slate-100 dark:divide-slate-800/60">
                             @forelse($uniqueTimes as $timeStr)
                                 <tr class="hover:bg-blue-50/30 dark:hover:bg-slate-800/30 transition-colors">
-                                    <!-- JAM COLUMN -->
                                     <td class="p-3 font-mono font-extrabold text-slate-800 dark:text-white border-r border-slate-200 dark:border-slate-800 text-center bg-slate-50/80 dark:bg-slate-900/60">
                                         <span class="inline-block bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 px-2.5 py-1 rounded-lg text-xs shadow-inner">
                                             {{ $timeStr }}
                                         </span>
                                     </td>
 
-                                    <!-- DAYS COLUMNS -->
                                     @foreach($matrixDays as $dayKey => $dayLabel)
                                         @php
                                             $matchingEvents = $allSchedules->filter(function($item) use ($dayKey, $timeStr) {
@@ -783,22 +772,17 @@
                                                 @foreach($matchingEvents as $ev)
                                                     @php
                                                         $nameLower = strtolower($ev->event_name);
-
-                                                        // DEFAULT: Biru untuk KBM / Masuk
                                                         $badgeStyle = "bg-blue-50 dark:bg-blue-950/40 border-blue-200 dark:border-blue-900/60 text-blue-950 dark:text-blue-200";
                                                         $accentDot = "bg-blue-500";
 
-                                                        // KUNING: Event (Upacara, Literasi, Senam)
                                                         if (stristr($nameLower, 'upacara') || stristr($nameLower, 'literasi') || stristr($nameLower, 'senam')) {
                                                             $badgeStyle = "bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-900/60 text-amber-950 dark:text-amber-200";
                                                             $accentDot = "bg-amber-500";
                                                         } 
-                                                        // HIJAU: Dhuha / Tadris BTQ
                                                         elseif (stristr($nameLower, 'dhuha') || stristr($nameLower, 'btq') || stristr($nameLower, 'tadris')) {
                                                             $badgeStyle = "bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-900/60 text-emerald-950 dark:text-emerald-200";
                                                             $accentDot = "bg-emerald-500";
                                                         } 
-                                                        // MERAH: Pulang & Istirahat
                                                         elseif (stristr($nameLower, 'pulang') || stristr($nameLower, 'istirahat')) {
                                                             $badgeStyle = "bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-900/60 text-rose-950 dark:text-rose-200";
                                                             $accentDot = "bg-rose-500";
@@ -1046,12 +1030,12 @@
             if (document.visibilityState === 'visible' && wakeLock === null) initKeepAlive();
         });
 
-        // MODAL SETTING (KELOLA JADWAL)
+        // MODAL SETTING
         function openModal() { document.getElementById('modal-schedule').classList.remove('hidden'); }
         function closeModal() { document.getElementById('modal-schedule').classList.add('hidden'); }
         function closeModalOnBackdrop(event) { if (event.target.id === 'modal-schedule') closeModal(); }
 
-        // MODAL PRATINJAU (LIHAT SEMUA JADWAL MATRIX)
+        // MODAL PRATINJAU
         function closeViewModal() { document.getElementById('modal-view-schedule').classList.add('hidden'); }
         function closeViewModalOnBackdrop(event) { if (event.target.id === 'modal-view-schedule') closeViewModal(); }
 
