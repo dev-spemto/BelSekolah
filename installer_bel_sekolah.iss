@@ -47,9 +47,9 @@ Name: "{autodesktop}\Bel Sekolah Otomatis"; Filename: "wscript.exe"; Parameters:
 Name: "{userstartup}\BelSekolahRunner"; Filename: "wscript.exe"; Parameters: """{app}\run_background.vbs"""; WorkingDir: "{app}"; IconFilename: "{app}\app.ico"; Tasks: autostart
 
 [Run]
-; 1. Matikan seluruh instance PHP dan WScript lama beserta sub-prosesnya (/T)
-Filename: "taskkill.exe"; Parameters: "/F /IM php.exe /T"; Flags: runhidden; StatusMsg: "Menutup sesi PHP lama di latar belakang..."
-Filename: "taskkill.exe"; Parameters: "/F /IM wscript.exe /T"; Flags: runhidden; StatusMsg: "Menutup runner script lama..."
+; 1. Matikan seluruh instance PHP dan WScript lama (dijalankan via cmd agar aman jika proses tidak ditemukan)
+Filename: "{cmd}"; Parameters: "/c taskkill /F /IM php.exe /T >nul 2>&1"; Flags: runhidden; StatusMsg: "Menutup sesi PHP lama di latar belakang..."
+Filename: "{cmd}"; Parameters: "/c taskkill /F /IM wscript.exe /T >nul 2>&1"; Flags: runhidden; StatusMsg: "Menutup runner script lama..."
 
 ; 2. Timpa paksa .env lama dengan .env.example fresh
 Filename: "{cmd}"; Parameters: "/c copy /Y ""{app}\.env.example"" ""{app}\.env"""; Flags: runhidden; StatusMsg: "Menimpa file konfigurasi lama..."
@@ -71,8 +71,8 @@ Filename: "wscript.exe"; Parameters: """{app}\run_background.vbs"""; WorkingDir:
 
 [UninstallRun]
 ; Hentikan proses latar belakang PHP dan WScript saat uninstall
-Filename: "taskkill.exe"; Parameters: "/F /IM php.exe /T"; Flags: runhidden; RunOnceId: "StopPhpProcessOnUninstall"
-Filename: "taskkill.exe"; Parameters: "/F /IM wscript.exe /T"; Flags: runhidden; RunOnceId: "StopWscriptProcessOnUninstall"
+Filename: "{cmd}"; Parameters: "/c taskkill /F /IM php.exe /T >nul 2>&1"; Flags: runhidden; RunOnceId: "StopPhpProcessOnUninstall"
+Filename: "{cmd}"; Parameters: "/c taskkill /F /IM wscript.exe /T >nul 2>&1"; Flags: runhidden; RunOnceId: "StopWscriptProcessOnUninstall"
 
 [UninstallDelete]
 ; Pembersihan total folder instalasi saat uninstall
@@ -110,7 +110,8 @@ begin
   end;
 
   if FileExists(ExpandConstant('{commonpf32}\Microsoft\Edge\Application\msedge.exe')) then begin IsAppModeSupported := True; Result := ExpandConstant('{commonpf32}\Microsoft\Edge\Application\msedge.exe'); Exit; end;
-  if FileExists(ExpandConstant('{commonpf64}\Microsoft\Edge\Application\msedge.exe')) then begin IsAppModeSupported := True; Result := ExpandConstant('{commonpf64}\Google\Chrome\Application\chrome.exe'); Exit; end;
+  // === PERBAIKAN BUG TYPO DI SINI: ganti Google\Chrome menjadi Microsoft\Edge ===
+  if FileExists(ExpandConstant('{commonpf64}\Microsoft\Edge\Application\msedge.exe')) then begin IsAppModeSupported := True; Result := ExpandConstant('{commonpf64}\Microsoft\Edge\Application\msedge.exe'); Exit; end;
 
   if RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\firefox.exe', '', Path) or
      RegQueryStringValue(HKEY_CURRENT_USER, 'SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\firefox.exe', '', Path) then

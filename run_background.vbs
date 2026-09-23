@@ -42,9 +42,13 @@ If NeedMigration Then
     WshShell.Run CmdKeyGen, 0, True
 End If
 
-' 6. Jalankan PHP Artisan Serve di Port 8085
+' 6a. Jalankan PHP Artisan Serve di Port 8085
 CmdToRun = "cmd /c """"" & PhpExecutable & """ artisan serve --host=127.0.0.1 --port=8085"""
 WshShell.Run CmdToRun, 0, False
+
+' 6b. Jalankan Laravel Schedule Worker di Background (Untuk Auto Close & Auto Shutdown)
+CmdSchedule = "cmd /c """"" & PhpExecutable & """ artisan schedule:work"""
+WshShell.Run CmdSchedule, 0, False
 
 ' 7. LOOP PENGECEKAN KONEKSI (Menunggu Server Siap Sebelum Buka Browser)
 TargetURL = "http://127.0.0.1:8085"
